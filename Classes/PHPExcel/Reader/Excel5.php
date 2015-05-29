@@ -3551,7 +3551,9 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 			$xfIndex = (0x0FFF0000 & self::_GetInt4d($recordData, 12)) >> 16;
 
 			if ($hasExplicitFormat) {
-				$this->_phpSheet->getRowDimension($r + 1)->setXfIndex($this->_mapCellXfIndex[$xfIndex]);
+				if (isset($this->_mapCellXfIndex[$xfIndex])) {
+					$this->_phpSheet->getRowDimension($r + 1)->setXfIndex($this->_mapCellXfIndex[$xfIndex]);
+				}
 			}
 		}
 	}
